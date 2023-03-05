@@ -135,7 +135,7 @@ export default function MiniDrawer() {
           </Typography>
 
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 0 }}>
-            Tooggle
+            ⚙️🔨😸
           </Typography>
         </Toolbar>
       </AppBar>

@@ -1,10 +1,10 @@
 import { Box, Button, Card, CardContent } from "@mui/material";
 import React, { useEffect, useState } from "react";
 
-import PlayCircleFilledIcon from '@mui/icons-material/PlayCircleFilled';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
-import PauseIcon from '@mui/icons-material/Pause';
-import RestartAltIcon from '@mui/icons-material/RestartAlt';
+import PlayCircleFilledIcon from "@mui/icons-material/PlayCircleFilled";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
+import RestartAltIcon from "@mui/icons-material/RestartAlt";
 
 import { green } from "@mui/material/colors";
 
@@ -26,20 +26,25 @@ export default function Stopwatch() {
     return () => clearInterval(interval);
   }, [timerOn]);
 
-
-
-  
-
   return (
-    <Card sx={{ display: "flex", width: 200}}>
-      <Box sx={{ display: "flex", flexDirection: "column", height: 210, width: 200 }}>
-        <CardContent className='card_content'
+    <Card sx={{ display: "flex", width: 300 }}>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          height: 230,
+          width: 300,
+        }}
+      >
+        <CardContent
+          className="card_content"
           sx={{
             flex: "1 0 auto",
             backgroundColor: green[800],
             color: "black",
-            maxWidth:200,
-            maxHeight: 70
+            maxWidth: 300,
+            maxHeight: 100,
+            fontSize: 50,
           }}
         >
           <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
@@ -51,38 +56,41 @@ export default function Stopwatch() {
           sx={{
             display: "flex",
             alignItems: "center",
-            justifyContent: 'center'
-          
+            justifyContent: "center",
           }}
         >
+          {!timerOn && time === 0 && (
+            <Button
+              onClick={() => setTimerOn(true)}
+              variant="contained"
+              color="success"
+              sx={{ m: 2, p: 1 }}
+            >
+              Start <PlayCircleFilledIcon />
+            </Button>
+          )}
 
-          {!timerOn && time === 0 && (<Button
-            onClick={()=>setTimerOn(true)}
-            variant="contained"
-            color="success"
-            sx={{ m: 2, p: 1 }}
-          >
-            Start <PlayCircleFilledIcon />
-          </Button>)}
+          {timerOn && (
+            <Button
+              onClick={() => setTimerOn(false)}
+              variant="outlined"
+              color="error"
+              sx={{ m: 2 }}
+            >
+              Stop <PauseIcon />
+            </Button>
+          )}
 
-          {timerOn && (<Button
-            onClick={()=>setTimerOn(false)}
-            variant="outlined"
-            color="error"
-            sx={{ m: 2 }}
-          >
-            Stop <PauseIcon />
-          </Button>)}
-
-          {!timerOn && time !== 0 && (<Button
-            onClick={()=>setTimerOn(true)}
-            variant="contained"
-            color="success"
-            sx={{ p: 1,
-            m:2 }}
-          >
-            Resume <PlayArrowIcon />
-          </Button>)}
+          {!timerOn && time !== 0 && (
+            <Button
+              onClick={() => setTimerOn(true)}
+              variant="contained"
+              color="success"
+              sx={{ p: 1, m: 2 }}
+            >
+              Resume <PlayArrowIcon />
+            </Button>
+          )}
         </Box>
 
         <Box
@@ -90,12 +98,13 @@ export default function Stopwatch() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-           
           }}
         >
-          {!timerOn && time > 0 && (<Button onClick={()=>setTime(0)} sx={{ mb: 2}}>
-            Reset <RestartAltIcon />
-          </Button>)}
+          {!timerOn && time > 0 && (
+            <Button onClick={() => setTime(0)} sx={{ mb: 2 }}>
+              Reset <RestartAltIcon />
+            </Button>
+          )}
         </Box>
       </Box>
     </Card>
