@@ -1,5 +1,10 @@
 import * as React from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import {
+  createTheme,
+  styled,
+  useTheme,
+  ThemeProvider,
+} from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import MuiDrawer from "@mui/material/Drawer";
 import MuiAppBar from "@mui/material/AppBar";
@@ -25,6 +30,11 @@ import HomeIcon from "@mui/icons-material/Home";
 import AlarmAddIcon from "@mui/icons-material/AlarmAdd";
 import TimerIcon from "@mui/icons-material/Timer";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+
+import Switch from "@mui/material/Switch";
+
+import LightModeIcon from "@mui/icons-material/LightMode";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 
 const drawerWidth = 240;
 
@@ -93,7 +103,7 @@ const Drawer = styled(MuiDrawer, {
   }),
 }));
 
-export default function MiniDrawer() {
+export default function MiniDrawer({ check, change }) {
   const theme = useTheme();
   const [open, setOpen] = React.useState(true);
   const navigate = useNavigate();
@@ -106,7 +116,7 @@ export default function MiniDrawer() {
     setOpen(false);
   };
 
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
 
   const handleListItemClick = (event, index) => {
     setSelectedIndex(index);
@@ -131,12 +141,18 @@ export default function MiniDrawer() {
           </IconButton>
 
           <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
-            Tools Demo
+            Tools Demo ⚙️🔨😸
           </Typography>
 
-          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 0 }}>
-            ⚙️🔨😸
-          </Typography>
+          <LightModeIcon />
+          <Switch
+            color="default"
+            inputProps={{ "aria-label": "Switch color mode" }}
+            defaultChecked
+            onChange={change}
+            checked={check}
+          />
+          <DarkModeIcon />
         </Toolbar>
       </AppBar>
 

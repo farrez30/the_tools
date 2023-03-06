@@ -4,7 +4,7 @@ import { Route, Routes } from "react-router";
 import { Link } from "react-router-dom";
 import MiniDrawer from "./components/Sidenav";
 
-import { ThemeProvider, createTheme } from "@mui/material/styles";
+import { useTheme, ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import ToggleColorMode from "./components/Darkmode";
 
@@ -12,30 +12,50 @@ import Counter from "./pages/Counter";
 import SearchFilter from "./pages/SearchFilter";
 import Stopwatch from "./pages/Stopwatch";
 import Home from "./pages/Home";
-
-const darkTheme = createTheme({
-  palette: {
-    mode: "dark",
-  },
-});
-
+import { useState } from "react";
+import { Paper } from "@mui/material";
 
 function App() {
-  return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      <div className="App">
-        <header className="App-header">
-          <MiniDrawer />
-          <Routes>
-            <Route path="/" element={<Home/> }/>
-            <Route path="/counter" element={<Counter/> }/>
-            <Route path="/stopwatch" element={<Stopwatch/> }/>
-            <Route path="/searchfilter" element={<SearchFilter/> }/>
-          </Routes>
+  const [darkMode, setDarkMode] = useState(false);
 
-        </header>
-      </div>
+  // const darkTheme = createTheme({
+  //   palette: {
+  //     mode: darkMode ? "dark" : "light",
+  //   },
+  // });
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: "dark",
+    },
+  });
+  const lightTheme = createTheme({
+    palette: {
+      mode: "light",
+    },
+    
+  });
+
+  return (
+    <ThemeProvider theme={darkMode ? darkTheme : lightTheme}>
+      <CssBaseline />
+      {/* <Paper> */}
+        <div className="App">
+          <header className="App-header">
+            <MiniDrawer
+              check={darkMode}
+              change={() => setDarkMode(!darkMode)}
+            />
+            <Routes>
+              <Route path="/" element={<Home />} />
+
+              <Route path="/counter" element={<Counter />} />
+              <Route path="/stopwatch" element={<Stopwatch />} />
+              <Route path="/searchfilter" element={<SearchFilter />} />
+            </Routes>
+          </header>
+        </div>
+      {/* </Paper> */}
     </ThemeProvider>
   );
 }
