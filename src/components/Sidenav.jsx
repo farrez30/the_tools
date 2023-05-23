@@ -30,6 +30,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import AlarmAddIcon from "@mui/icons-material/AlarmAdd";
 import TimerIcon from "@mui/icons-material/Timer";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
+import TableChartIcon from '@mui/icons-material/TableChart';
 
 import Switch from "@mui/material/Switch";
 
@@ -283,6 +284,37 @@ export default function MiniDrawer({ check, change }) {
 
               <ListItemText
                 primary="Search Filter"
+                sx={{ opacity: open ? 1 : 0 }}
+              />
+            </ListItemButton>
+          </ListItem>
+
+          <ListItem
+            disablePadding
+            sx={{ display: "block" }}
+            onClick={() => navigate("/table")}
+          >
+            <ListItemButton
+              selected={selectedIndex === 4}
+              onClick={(event) => handleListItemClick(event, 4)}
+              sx={{
+                minHeight: 48,
+                justifyContent: open ? "initial" : "center",
+                px: 2.5,
+              }}
+            >
+              <ListItemIcon
+                sx={{
+                  minWidth: 0,
+                  mr: open ? 3 : "auto",
+                  justifyContent: "center",
+                }}
+              >
+                <TableChartIcon />
+              </ListItemIcon>
+
+              <ListItemText
+                primary="Add/Delete Table"
                 sx={{ opacity: open ? 1 : 0 }}
               />
             </ListItemButton>

@@ -14,6 +14,7 @@ import Stopwatch from "./pages/Stopwatch";
 import Home from "./pages/Home";
 import { useState } from "react";
 import { Paper } from "@mui/material";
+import CustomTable from "./pages/Table";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
@@ -52,6 +53,7 @@ function App() {
               <Route path="/counter" element={<Counter />} />
               <Route path="/stopwatch" element={<Stopwatch />} />
               <Route path="/searchfilter" element={<SearchFilter />} />
+              <Route path="/table" element={<CustomTable />} />
             </Routes>
           </header>
         </div>
